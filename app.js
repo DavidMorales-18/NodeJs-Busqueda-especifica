@@ -26,9 +26,6 @@ switch (comando) {
     case 'publicar':
         let consulta = tareas.imprimir(argv.file, argv.country, argv.year);
         break;
-    case 'guardar':
-        let guardar = tareas.guardar(argv.file, argv.country, argv.year, argv.out);
-        break;
     default:
         console.log('Comando no reconocido');
 }

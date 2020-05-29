@@ -1,6 +1,7 @@
 let path = 'API_IT.CEL.SETS_DS2_es_csv_v2_1004854.csv';
 const csv = require("csvtojson");
 const colors = require('colors');
+const fs = require('fs'); //libreria de fs
 
 
 async function getData(file) {
@@ -50,8 +51,22 @@ async function getEle(pais, cod) {
         }
     }
 }
+async function getMedia(pais, year) {
+    let sum = 0;
+    let prom = 0
+    for (var i = 0; i < pais.length; i++) {
+        let va = Object.values(pais[i]);
+
+        return Number(va[year[i]])
+
+
+    }
+}
+
+
 
 async function imprimir(path, cod, year) {
+
     let pais = await getData(path);
     //console.log(pais);
     if (pais != "Error 200") {
@@ -63,6 +78,7 @@ async function imprimir(path, cod, year) {
             if (year >= 1964 && year <= 2019) {
 
                 let Countr = await getCountr(pais, cod);
+                let cal = await getMedia(pais, cod);
                 console.log("   ____________________________________________________________________________________________________".bgGreen);
 
                 console.log("| ".bgGreen + `\n` + "| ".bgGreen + "    " + `::::Archivo ${path} cargado correctamente::::`.bgCyan);
@@ -72,7 +88,26 @@ async function imprimir(path, cod, year) {
                 console.log("| ".bgGreen + `     Año: `.brightYellow + `${year}`.brightCyan);
 
 
+
                 console.log("   ____________________________________________________________________________________________________".bgGreen);
+
+                var vecttxt = [];
+                let men = ele
+                let men1 = cod
+                let men2 = Countr
+                let men3 = year
+                vecttxt.push(men1, men2, men3, men)
+                fs.writeFile(`./resultados/nombredelarchivo.txt`, vecttxt, (error) => {
+                    if (error)
+                        throw new Error("NO SE PUDO GUARDAR", error);
+                });
+
+
+
+
+
+
+
 
 
 
@@ -86,6 +121,9 @@ async function imprimir(path, cod, year) {
     } else {
         console.log(`\n `, `::::No existe el archivo ${path} !::::`.bgRed)
     }
+
+
+
 
 
 }
