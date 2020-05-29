@@ -25,7 +25,7 @@ async function getCountry(pais, cod) {
     }
 }
 
-async function getCountry(pais, cod) {
+async function getCountry(pais, cod) { ///ingresar al metodo
     for (var i = 0; i < pais.length; i++) {
         let va = Object.values(pais[i]);
         if (va[1] == cod) {
@@ -37,119 +37,45 @@ async function getCountry(pais, cod) {
 async function getCountr(pais, cod) {
     for (var i = 0; i < pais.length; i++) {
         let va = Object.values(pais[i]);
-        if (va[1] === cod) {
-            return pais
+        if (va[1] == cod) {
+            return va[0]
         }
     }
 }
-
-async function getSuscrip(pais, cod, year) {
+async function getEle(pais, cod) {
     for (var i = 0; i < pais.length; i++) {
         let va = Object.values(pais[i]);
         if (va[1] == cod) {
-            suscrip = va[year - 1956]
-            return suscrip
+            return va[2]
         }
     }
-}
-
-
-async function getMedia(pais, year) {
-    let sum = 0;
-    let prom = 0
-    for (var i = 0; i < pais.length; i++) {
-        let va = Object.values(pais[i]);
-        let num = Number(va[year - 1956])
-        if (num > 0) {
-            prom++;
-            sum = sum + num;
-        }
-    }
-    if (prom > 0) {
-        prom = (sum / prom).toFixed(3)
-        return prom
-    }
-}
-
-
-
-
-async function getTop5Mayor(pais, year, suscriPais) {
-    let top = [];
-    for (let dato of pais) {
-        dato = Object.values(dato);
-        suscrip = Number(dato[year - 1956]);
-        if (suscrip > suscriPais) {
-            let datos = {
-                Pais: dato[0],
-                Suscripciones: suscrip
-            }
-            top.push(datos);
-        }
-        top.sort(function(a, b) {
-            return (a.Suscripciones - b.Suscripciones)
-        })
-        top = top.slice(0, 5)
-    }
-    return top
-}
-
-
-
-
-
-async function getTop5Menor(pais, year, suscriPais) {
-    let top = [];
-    for (let dato of pais) {
-        dato = Object.values(dato);
-        suscrip = Number(dato[year - 1956]);
-        if (suscrip < suscriPais) {
-            let datos = {
-                Pais: dato[0],
-                Suscripciones: suscrip
-            }
-            top.push(datos);
-        }
-        top.sort(function(a, b) {
-            return (b.Suscripciones - a.Suscripciones)
-        })
-        top = top.slice(0, 5)
-    }
-    return top
-}
-async function getTop5(pais, year) {
-    let top = [];
-    let num = 0;
-    for (let dato of pais) {
-        dato = Object.values(dato);
-        suscrip = Number(dato[year - 1956]);
-        if (suscrip > num) {
-            let datos = {
-                Pais: dato[0],
-                Suscripciones: suscrip
-            }
-            top.push(datos);
-        }
-        num = suscrip;
-        top.sort(function(a, b) {
-            return (b.Suscripciones - a.Suscripciones)
-        })
-        top = top.slice(0, 5)
-    }
-    return top
 }
 
 async function imprimir(path, cod, year) {
     let pais = await getData(path);
+    //console.log(pais);
     if (pais != "Error 200") {
         let Country = await getCountry(pais, cod);
-        if (Country == true) {
+        let ele = await getEle(pais, cod);
+
+        if (Country == true) { //verdadero 
+
             if (year >= 1964 && year <= 2019) {
-                console.log(" -----------------------------------------------------------------------------------------".bgGreen);
-                console.log("| ".bgGreen + `\n` + "| ".bgGreen + "    " + `::::Archivo ${path} cargado correctamente::::`.bgCyan);
-                console.log("| ".bgGreen + `     Pais: `.brightYellow + `${cod}`.brightCyan);
-                console.log("| ".bgGreen + `     Año: `.brightYellow + `${year}`.brightCyan);
+
                 let Countr = await getCountr(pais, cod);
+                console.log("   ____________________________________________________________________________________________________".bgGreen);
+
+                console.log("| ".bgGreen + `\n` + "| ".bgGreen + "    " + `::::Archivo ${path} cargado correctamente::::`.bgCyan);
+                console.log("| ".bgGreen + `     Datos : `.brightYellow + `${ele}`.bgBlue.brightYellow);
+                console.log("| ".bgGreen + `     Codigo-Pais: `.brightYellow + `${cod}`.brightCyan);
+                console.log("| ".bgGreen + `     Pais: `.brightYellow + `${Countr}`.brightCyan);
+                console.log("| ".bgGreen + `     Año: `.brightYellow + `${year}`.brightCyan);
+
+
+                console.log("   ____________________________________________________________________________________________________".bgGreen);
+
+
+
 
             } else {
                 console.log('\n     ' + `Al momento no existe registros para el año: ${year} `.bgRed);
@@ -163,6 +89,8 @@ async function imprimir(path, cod, year) {
 
 
 }
+
 module.exports = {
     imprimir
+
 }

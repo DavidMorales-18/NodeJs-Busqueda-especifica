@@ -20,6 +20,8 @@ const tareas = require('./buscador/buscar');
 const colors = require('colors');
 let comando = argv._[0];
 
+
+
 switch (comando) {
     case 'publicar':
         let consulta = tareas.imprimir(argv.file, argv.country, argv.year);
