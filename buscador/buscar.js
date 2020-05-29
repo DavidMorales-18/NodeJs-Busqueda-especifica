@@ -25,6 +25,24 @@ async function getCountry(pais, cod) {
     }
 }
 
+async function getCountry(pais, cod) {
+    for (var i = 0; i < pais.length; i++) {
+        let va = Object.values(pais[i]);
+        if (va[1] == cod) {
+            return true
+        }
+    }
+}
+
+async function getCountr(pais, cod) {
+    for (var i = 0; i < pais.length; i++) {
+        let va = Object.values(pais[i]);
+        if (va[1] === cod) {
+            return pais
+        }
+    }
+}
+
 async function getSuscrip(pais, cod, year) {
     for (var i = 0; i < pais.length; i++) {
         let va = Object.values(pais[i]);
@@ -34,6 +52,7 @@ async function getSuscrip(pais, cod, year) {
         }
     }
 }
+
 
 async function getMedia(pais, year) {
     let sum = 0;
@@ -51,6 +70,10 @@ async function getMedia(pais, year) {
         return prom
     }
 }
+
+
+
+
 async function getTop5Mayor(pais, year, suscriPais) {
     let top = [];
     for (let dato of pais) {
@@ -70,6 +93,11 @@ async function getTop5Mayor(pais, year, suscriPais) {
     }
     return top
 }
+
+
+
+
+
 async function getTop5Menor(pais, year, suscriPais) {
     let top = [];
     for (let dato of pais) {
@@ -121,44 +149,8 @@ async function imprimir(path, cod, year) {
                 console.log("| ".bgGreen + `\n` + "| ".bgGreen + "    " + `::::Archivo ${path} cargado correctamente::::`.bgCyan);
                 console.log("| ".bgGreen + `     Pais: `.brightYellow + `${cod}`.brightCyan);
                 console.log("| ".bgGreen + `     Año: `.brightYellow + `${year}`.brightCyan);
-                getSuscrip(pais, cod, year)
-                    .then((suscriPais) => {
-                        getMedia(pais, year, suscriPais)
-                            .then((med) => {
-                                console.log("| ".bgGreen + `     La media de suscripciones de todos los países es: `.brightYellow + `${(med)}`.brightCyan);
-                            })
-                        getTop5Mayor(pais, year, suscriPais)
-                            .then((tp5May) => {
-                                console.log(`------ Cinco países por ENCIMA del valor de suscripciones de ${cod} -----`.magenta);
-                                for (let i of tp5May) {
-                                    if (i.Suscripciones > 0) {
-                                        console.log("| ".bgGreen + `     Pais: `.brightYellow + `${i.Pais}`.brightCyan);
-                                        console.log("| ".bgGreen + `     Suscripciones: `.brightYellow + `${i.Suscripciones}\n`.brightCyan + "| ".bgGreen);
-                                    }
-                                }
+                let Countr = await getCountr(pais, cod);
 
-                            })
-                        getTop5Menor(pais, year, suscriPais)
-                            .then((tp5Men) => {
-                                console.log(`------ Cinco países por DEBAJO del valor de suscripciones de ${cod} -----`.magenta);
-                                for (let i of tp5Men) {
-                                    if (i.Suscripciones > 0) {
-                                        console.log("| ".bgGreen + `     Pais: `.brightYellow + `${i.Pais}`.brightCyan);
-                                        console.log("| ".bgGreen + `     Suscripciones: `.brightYellow + `${i.Suscripciones}\n`.brightCyan + "| ".bgGreen);
-                                    }
-                                }
-                            })
-                        getTop5(pais, year)
-                            .then((tp5) => {
-                                console.log(`------ TOP 5 de países con suscripciones mas alta ----`.magenta);
-                                for (let i of tp5) {
-                                    console.log("| ".bgGreen + `     Pais: `.brightYellow + `${i.Pais}`.brightCyan);
-                                    console.log("| ".bgGreen + `     Suscripciones: `.brightYellow + `${i.Suscripciones}\n`.brightCyan + "| ".bgGreen);
-                                }
-                                console.log(" -----------------------------------------------------------------------------------------".bgGreen);
-                            })
-
-                    })
             } else {
                 console.log('\n     ' + `Al momento no existe registros para el año: ${year} `.bgRed);
             }
