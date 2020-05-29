@@ -16,13 +16,9 @@ FORMA PARA GUARDAR
 node app.js guardar -f "./nombre_archivo.csv" -c "codigo_pais" -y año -o "nomre_archivo_sin_extension"
  */
 const argv = require('./config/yargs').argv;
-const tareas = require('./controlador/tareas');
-const estadisticas = require('./controlador/estadisticas');
+const tareas = require('./buscador/buscar');
 const colors = require('colors');
 let comando = argv._[0];
-
-
-
 
 switch (comando) {
     case 'publicar':
