@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/DavidMorales-18/NodeJs-Busqueda-especifica/issues"
   },
-  "homepage": "https://github.com/DavidMorales-18/NodeJs-Busqueda-especifica#readme"
+  "homepage": "https://github.com/DavidMorales-18/NodeJs-Busqueda-especifica#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "csvtojson": "^2.0.10",
+    "yargs": "^15.3.1"
+  }
 }
