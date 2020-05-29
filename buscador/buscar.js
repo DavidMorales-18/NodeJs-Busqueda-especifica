@@ -86,6 +86,7 @@ async function imprimir(path, cod, year) {
                 console.log("| ".bgGreen + `     Codigo-Pais: `.brightYellow + `${cod}`.brightCyan);
                 console.log("| ".bgGreen + `     Pais: `.brightYellow + `${Countr}`.brightCyan);
                 console.log("| ".bgGreen + `     Año: `.brightYellow + `${year}`.brightCyan);
+                console.log("| ".bgGreen + `     Año: `.brightYellow + `${year}`.brightCyan);
 
 
 
@@ -97,7 +98,7 @@ async function imprimir(path, cod, year) {
                 let men2 = Countr
                 let men3 = year
                 vecttxt.push(men1, men2, men3, men)
-                fs.writeFile(`./resultados/nombredelarchivo.txt`, vecttxt, (error) => {
+                fs.writeFile(`./resultados/${Countr}.txt`, vecttxt, (error) => {
                     if (error)
                         throw new Error("NO SE PUDO GUARDAR", error);
                 });
