@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-busqueda-especifica",
+  "version": "1.0.0",
+  "description": "Examen",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidMorales-18/NodeJs-Busqueda-especifica.git"
+  },
+  "author": "David Morales",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidMorales-18/NodeJs-Busqueda-especifica/issues"
+  },
+  "homepage": "https://github.com/DavidMorales-18/NodeJs-Busqueda-especifica#readme"
+}
